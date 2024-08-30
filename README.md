@@ -18,6 +18,16 @@ Este projeto é um **Sistema de Cálculo de Salários** desenvolvido com **Sprin
 
 ## Configuração do Projeto
 
+### Importante
+
+Antes de iniciar a aplicação, certifique-se de que as tabelas necessárias estejam criadas no banco de dados. As tabelas a serem importadas são:
+
+- `pessoa`
+- `cargos`
+- `vencimento`
+- `cargo_vencimentos`
+
+
 ### 1. **Clonando o Repositório**
 
 Clone o repositório e navegue até a pasta do projeto:
