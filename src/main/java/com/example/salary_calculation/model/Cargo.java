@@ -17,10 +17,6 @@ public class Cargo {
 
     private String nome;
 
-    //Descomentar caso queira um relacionamento bidirecional, para as funcionalidades desse projeto não será necessario, por esse motivo estou tirando
-    //@OneToMany(mappedBy = "cargo")
-    //private List<Pessoa> pessoas;
-
     // Getters e Setters
     public int getId() {
         return id;

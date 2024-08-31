@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Enviar Trabalho</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:commandButton value="Home" action="index.xhtml?faces-redirect=true" style="margin-right: 20px;" />
+
+        <p:commandButton value="Lista de pessoas" action="list_people.xhtml?faces-redirect=true"/>
+    </h:form>
+    <h:form id="uploadForm">
+        <p:commandButton value="Recalcular Salários"
+                         actionListener="#{pessoaSalarioConsolidadoController.gerarDadosSalariosConsolidado}"
+                         update="salariosTable" />
+
+        <p:dataTable var="salario" value="#{pessoaSalarioConsolidadoController.listaSalariosConsolidados}"
+                     paginator="true" rows="10" id="salariosTable">
+
+            <p:column headerText="ID Pessoa">
+                <h:outputText value="#{salario.pessoaId}" />
+            </p:column>
+
+            <p:column headerText="Nome">
+                <h:outputText value="#{salario.nomePessoa}" />
+            </p:column>
+
+            <p:column headerText="Cargo">
+                <h:outputText value="#{salario.nomeCargo}" />
+            </p:column>
+
+            <p:column headerText="Salário">
+                <h:outputText value="#{salario.salario}" />
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+
+    <h:messages />
+</h:body>
+</html>

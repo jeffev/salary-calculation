@@ -1,5 +1,6 @@
 package com.example.salary_calculation.model;
 
+import jakarta.persistence.Version;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +13,6 @@ import jakarta.persistence.Column;
 public class PessoaSalarioConsolidado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pessoa_id")
     private int pessoaId;
 
@@ -24,6 +24,10 @@ public class PessoaSalarioConsolidado {
 
     @Column(name = "salario", nullable = false)
     private double salario;
+
+    @Version
+    @Column(name = "version")
+    private Long version;
 
     // Getters e Setters
 
