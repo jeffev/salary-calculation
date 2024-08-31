@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CargoService {
@@ -15,6 +16,11 @@ public class CargoService {
 
     public List<Cargo> findAll() {
         return cargoRepository.findAll();
+    }
+
+    public Cargo findById(int id) {
+        Optional<Cargo> optionalCargo = cargoRepository.findById(id);
+        return optionalCargo.orElse(null);
     }
 
 }

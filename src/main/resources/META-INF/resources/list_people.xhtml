@@ -140,6 +140,7 @@
                         <f:facet name="input">
                             <p:selectOneMenu value="#{pessoa.cargo}">
                                 <f:selectItems value="#{pessoaController.cargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}" />
+                                <f:converter converterId="cargoConverter"/>
                             </p:selectOneMenu>
                         </f:facet>
                     </p:cellEditor>
