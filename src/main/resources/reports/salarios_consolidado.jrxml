@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="PessoaSalarioConsolidadoReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+    <queryString>
+        <![CDATA[SELECT * FROM pessoa_salario_consolidado]]>
+    </queryString>
+    <field name="pessoaId" class="java.lang.Integer"/>
+    <field name="nomePessoa" class="java.lang.String"/>
+    <field name="nomeCargo" class="java.lang.String"/>
+    <field name="salario" class="java.lang.Double"/>
+
+    <title>
+        <band height="50">
+            <textField>
+                <reportElement x="0" y="0" width="200" height="30"/>
+                <textFieldExpression><![CDATA["Relatório de Salários Consolidado"]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="30">
+            <staticText>
+                <reportElement x="0" y="0" width="100" height="30"/>
+                <text><![CDATA[Pessoa ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="100" y="0" width="200" height="30"/>
+                <text><![CDATA[Nome Pessoa]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="300" y="0" width="100" height="30"/>
+                <text><![CDATA[Nome Cargo]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="400" y="0" width="100" height="30"/>
+                <text><![CDATA[Salário]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="0" width="100" height="20"/>
+                <textFieldExpression><![CDATA[$F{pessoaId}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="100" y="0" width="200" height="20"/>
+                <textFieldExpression><![CDATA[$F{nomePessoa}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="300" y="0" width="100" height="20"/>
+                <textFieldExpression><![CDATA[$F{nomeCargo}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="400" y="0" width="100" height="20"/>
+                <textFieldExpression><![CDATA[$F{salario}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

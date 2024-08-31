@@ -3,18 +3,21 @@
       xmlns:h="jakarta.faces.html"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Enviar Trabalho</title>
+    <title>Lista de pessoas consolidado</title>
 </h:head>
 <h:body>
     <h:form>
         <p:commandButton value="Home" action="index.xhtml?faces-redirect=true" style="margin-right: 20px;" />
 
-        <p:commandButton value="Lista de pessoas" action="list_people.xhtml?faces-redirect=true"/>
+        <p:commandButton value="Lista de pessoas consolidado" action="list_people.xhtml?faces-redirect=true"/>
     </h:form>
+    <br/><br/>
     <h:form id="uploadForm">
         <p:commandButton value="Recalcular Salários"
                          actionListener="#{pessoaSalarioConsolidadoController.gerarDadosSalariosConsolidado}"
-                         update="salariosTable" />
+                         update="salariosTable" style="margin-right: 20px;"/>
+
+        <h:commandButton value="Gerar Relatório" action="#{salariosReportController.generateReport}" />
 
         <p:dataTable var="salario" value="#{pessoaSalarioConsolidadoController.listaSalariosConsolidados}"
                      paginator="true" rows="10" id="salariosTable">
