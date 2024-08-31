@@ -1,4 +1,4 @@
-package com.example.salary_calculation.service.exception;
+package com.example.salary_calculation.exception;
 
 public class ValidationException extends RuntimeException {
 

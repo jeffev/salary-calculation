@@ -1,4 +1,4 @@
-package com.example.salary_calculation.service;
+package com.example.salary_calculation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

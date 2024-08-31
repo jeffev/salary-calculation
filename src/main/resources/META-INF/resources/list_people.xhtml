@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Gerenciar Pessoas</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Sistema de Cálculo de Salários">
+            <p:commandButton value="Home" action="index.xhtml?faces-redirect=true"  style="margin-right: 20px;" />
+
+            <p:commandButton value="Pessoas consolidadas" action="consolidated_people.xhtml?faces-redirect=true"/>
+        </p:panel>
+    </h:form>
+    <h:form id="pessoaForm">
+        <p:panel header="Gerenciar Pessoas">
+
+            <p:commandButton value="Nova Pessoa"
+                             icon="pi pi-plus"
+                             action="#{pessoaController.prepareNewPessoa()}"
+                             oncomplete="PF('dlgPessoa').show();"
+                             update=":dialogs:pessoaDialog"
+                             process="@this"
+                             style="margin-bottom: 10px;" />
+
+            <p:dataTable value="#{pessoaController.pessoas}" var="pessoa" paginator="true" rows="10" id="pessoasTable" editable="true">
+
+                <p:column headerText="ID" style="width: 5%;">
+                    <h:outputText value="#{pessoa.id}" />
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.nome}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{pessoa.nome}" style="width:100%" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Cidade">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.cidade}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{pessoa.cidade}" style="width:100%" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Email">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.email}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{pessoa.email}" style="width:100%" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="CEP">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.cep}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{pessoa.cep}" style="width:100%" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Endereço">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.endereco}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{pessoa.endereco}" style="width:100%" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="País">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.pais}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{pessoa.pais}" style="width:100%" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Usuário">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.usuario}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{pessoa.usuario}" style="width:100%" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Telefone">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.telefone}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{pessoa.telefone}" style="width:100%" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Data de Nascimento">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.dataNascimento}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:calendar value="#{pessoa.dataNascimento}" pattern="dd/MM/yyyy" />
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Cargo">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{pessoa.cargo.nome}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu value="#{pessoa.cargo}">
+                                <f:selectItems value="#{pessoaController.cargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Ações" style="width: 8%;">
+                    <p:commandButton icon="pi pi-pencil"
+                                     update=":dialogs:pessoaDialog"
+                                     oncomplete="PF('dlgPessoa').show();"
+                                     action="#{pessoaController.setSelectedPessoa(pessoa)}"
+                                     title="Editar"
+                                     process="@this"
+                                     style="margin-right: 15px;" >
+                        <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaController.selectedPessoa}" />
+                    </p:commandButton>
+                    <p:commandButton icon="pi pi-trash"
+                                     actionListener="#{pessoaController.deletePessoa(pessoa.id)}"
+                                     update=":pessoaForm:pessoasTable"
+                                     title="Excluir" />
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+
+    <h:form id="dialogs">
+        <p:dialog header="Pessoa" widgetVar="dlgPessoa" id="pessoaDialog" modal="true" showEffect="fade" hideEffect="fade">
+            <h:panelGrid columns="2" cellpadding="5" >
+                <h:outputLabel for="nome" value="Nome:" />
+                <p:inputText id="nome" value="#{pessoaController.selectedPessoa.nome}" required="true" />
+
+                <h:outputLabel for="cidade" value="Cidade:" />
+                <p:inputText id="cidade" value="#{pessoaController.selectedPessoa.cidade}" required="true" />
+
+                <h:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{pessoaController.selectedPessoa.email}" required="true" />
+
+                <h:outputLabel for="cep" value="CEP:" />
+                <p:inputText id="cep" value="#{pessoaController.selectedPessoa.cep}" required="true" />
+
+                <h:outputLabel for="endereco" value="Endereço:" />
+                <p:inputText id="endereco" value="#{pessoaController.selectedPessoa.endereco}" required="true" />
+
+                <h:outputLabel for="pais" value="País:" />
+                <p:inputText id="pais" value="#{pessoaController.selectedPessoa.pais}" required="true" />
+
+                <h:outputLabel for="usuario" value="Usuário:" />
+                <p:inputText id="usuario" value="#{pessoaController.selectedPessoa.usuario}" required="true" />
+
+                <h:outputLabel for="telefone" value="Telefone:" />
+                <p:inputText id="telefone" value="#{pessoaController.selectedPessoa.telefone}" required="true" />
+
+                <h:outputLabel for="dataNascimento" value="Data de Nascimento:" />
+                <p:calendar id="dataNascimento" value="#{pessoaController.selectedPessoa.dataNascimento}" pattern="dd/MM/yyyy" required="true" />
+
+                <h:outputLabel for="cargo" value="Cargo:" />
+                <p:selectOneMenu id="cargo" value="#{pessoaController.selectedPessoa.cargo}">
+                    <f:selectItems value="#{pessoaController.cargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}" required="true" />
+                </p:selectOneMenu>
+            </h:panelGrid>
+
+            <f:facet name="footer">
+                <p:commandButton value="Salvar" actionListener="#{pessoaController.savePessoa}" onsuccess="PF('dlgPessoa').hide();"  style="margin-right: 20px;" />
+                <p:commandButton value="Cancelar" onclick="PF('dlgPessoa').hide();" />
+            </f:facet>
+        </p:dialog>
+    </h:form>
+
+</h:body>
+</html>

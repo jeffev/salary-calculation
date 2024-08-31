@@ -1,4 +1,4 @@
-package com.example.salary_calculation.service.model;
+package com.example.salary_calculation.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
