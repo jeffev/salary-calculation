@@ -46,9 +46,8 @@
                 <p:calendar id="dataNascimento" value="#{pessoaController.selectedPessoa.dataNascimento}" pattern="dd/MM/yyyy" required="true" />
 
                 <h:outputLabel for="cargo" value="Cargo:" />
-                <p:selectOneMenu id="cargo" value="#{pessoaController.selectedPessoa.cargo}">
+                <p:selectOneMenu id="cargo" value="#{pessoaController.selectedPessoa.cargo}" converter="cargoConverter">
                     <f:selectItems value="#{pessoaController.cargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}" />
-                    <f:converter converterId="cargoConverter"/>
                 </p:selectOneMenu>
             </h:panelGrid>
 

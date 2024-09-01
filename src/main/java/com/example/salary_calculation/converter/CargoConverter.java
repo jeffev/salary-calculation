@@ -24,7 +24,12 @@ public class CargoConverter implements Converter<Cargo> {
             return null;
         }
 
-        return cargoController.findCargoById(Integer.parseInt(value));
+        try {
+            int id = Integer.parseInt(value);
+            return cargoController.findCargoById(id);
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
     @Override
