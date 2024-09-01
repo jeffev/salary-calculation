@@ -54,8 +54,6 @@ public class PessoaController implements Serializable {
     }
 
     public void savePessoa() {
-        System.out.println("savePessoa");
-        System.out.println(selectedPessoa.getNome());
         try {
             if (selectedPessoa != null && selectedPessoa.getId() == 0) {
                 pessoaService.save(selectedPessoa);
@@ -145,8 +143,6 @@ public class PessoaController implements Serializable {
 
     public void setSelectedPessoa(Pessoa selectedPessoa) {
         this.selectedPessoa = selectedPessoa;
-        System.out.println("setSelectedPessoa");
-        System.out.println(selectedPessoa.getNome());
     }
 
     public List<Pessoa> getPessoas() {

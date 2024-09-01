@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PessoaService {
@@ -17,10 +16,6 @@ public class PessoaService {
 
     public List<Pessoa> findAll() {
         return pessoaRepository.findAll();
-    }
-
-    public Optional<Pessoa> findById(int id) {
-        return pessoaRepository.findById(id);
     }
 
     public Pessoa findByIdOrThrow(int id) {
