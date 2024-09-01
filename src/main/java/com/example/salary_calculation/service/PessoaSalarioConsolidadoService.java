@@ -28,6 +28,33 @@ public class PessoaSalarioConsolidadoService {
         return pessoaSalarioConsolidadoRepository.findAll();
     }
 
+    public double calculaSalario(int idCargo) {
+        List<CargoVencimento> cargoVencimentos = cargoVencimentoService.findByCargoId(idCargo);
+
+        return cargoVencimentos.stream()
+                .mapToDouble(cargoVencimento -> {
+                    double valor = cargoVencimento.getVencimento().getValor();
+                    return cargoVencimento.getVencimento().getTipo() == TipoVencimento.CREDITO ? valor : -valor;
+                })
+                .sum();
+    }
+
+    public PessoaSalarioConsolidado criaPessoaSalarioConsolidado(Pessoa pessoa, PessoaSalarioConsolidado consolidado) {
+        if (pessoa.getCargo() == null) {
+            consolidado.setPessoaId(pessoa.getId());
+            consolidado.setNomePessoa(pessoa.getNome());
+            consolidado.setNomeCargo("Cargo não definido");
+            consolidado.setSalario(0.0);
+        } else {
+            consolidado.setPessoaId(pessoa.getId());
+            consolidado.setNomePessoa(pessoa.getNome());
+            consolidado.setNomeCargo(pessoa.getCargo().getNome());
+            consolidado.setSalario(calculaSalario(pessoa.getCargo().getId()));
+        }
+
+        return consolidado;
+    }
+
     @Async
     @Transactional
     public void gerarDadosSalariosConsolidado() {
@@ -42,28 +69,7 @@ public class PessoaSalarioConsolidadoService {
                 consolidado = new PessoaSalarioConsolidado();
             }
 
-            if (pessoa.getCargo() == null) {
-                consolidado.setPessoaId(pessoa.getId());
-                consolidado.setNomePessoa(pessoa.getNome());
-                consolidado.setNomeCargo("Cargo não definido");
-                consolidado.setSalario(0.0);
-            } else {
-                List<CargoVencimento> cargoVencimentos = cargoVencimentoService.findByCargoId(pessoa.getCargo().getId());
-
-                double salarioTotal = cargoVencimentos.stream()
-                        .mapToDouble(cargoVencimento -> {
-                            double valor = cargoVencimento.getVencimento().getValor();
-                            return cargoVencimento.getVencimento().getTipo() == TipoVencimento.CREDITO ? valor : -valor;
-                        })
-                        .sum();
-
-                consolidado.setPessoaId(pessoa.getId());
-                consolidado.setNomePessoa(pessoa.getNome());
-                consolidado.setNomeCargo(pessoa.getCargo().getNome());
-                consolidado.setSalario(salarioTotal);
-            }
-
-            return consolidado;
+            return criaPessoaSalarioConsolidado(pessoa, consolidado);
         }).collect(Collectors.toList());
 
         pessoaSalarioConsolidadoRepository.saveAll(toSaveList);

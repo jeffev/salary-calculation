@@ -1,6 +1,6 @@
 package com.example.salary_calculation.controller;
 
-import com.example.salary_calculation.reporting.ReportService;
+import com.example.salary_calculation.reporting.RelatorioService;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
@@ -14,11 +14,11 @@ import java.io.OutputStream;
 public class SalariosReportController {
 
     @Autowired
-    private ReportService reportService;
+    private RelatorioService relatorioService;
 
     public void generateReport() {
         try {
-            byte[] reportBytes = reportService.generateReport();
+            byte[] reportBytes = relatorioService.generateReport();
 
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();

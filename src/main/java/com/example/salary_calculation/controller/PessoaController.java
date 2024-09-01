@@ -1,7 +1,7 @@
 package com.example.salary_calculation.controller;
 
 import com.example.salary_calculation.exception.PessoaNotFoundException;
-import com.example.salary_calculation.exception.ValidationException;
+import com.example.salary_calculation.exception.ValidacaoException;
 import com.example.salary_calculation.model.Cargo;
 import com.example.salary_calculation.model.Pessoa;
 import com.example.salary_calculation.service.CargoService;
@@ -44,13 +44,13 @@ public class PessoaController implements Serializable {
     public void prepareNewPessoa() throws IOException {
         this.selectedPessoa = new Pessoa();
 
-        FacesContext.getCurrentInstance().getExternalContext().redirect("edit_pessoa.xhtml?faces-redirect=true");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("editar_pessoa.xhtml?faces-redirect=true");
     }
 
     public void prepareEditPessoa(int id) throws IOException {
         findPessoaById(id);
 
-        FacesContext.getCurrentInstance().getExternalContext().redirect("edit_pessoa.xhtml?faces-redirect=true");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("editar_pessoa.xhtml?faces-redirect=true");
     }
 
     public void savePessoa() {
@@ -66,7 +66,7 @@ public class PessoaController implements Serializable {
             }
 
             selectedPessoa = new Pessoa();
-        } catch (ValidationException e) {
+        } catch (ValidacaoException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao salvar a pessoa: " + e.getMessage(), null));
@@ -86,7 +86,7 @@ public class PessoaController implements Serializable {
                             int index = pessoas.indexOf(p);
                             pessoas.set(index, selectedPessoa);
                         });
-            } catch (PessoaNotFoundException | ValidationException e) {
+            } catch (PessoaNotFoundException | ValidacaoException e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao atualizar a pessoa: " + e.getMessage(), null));

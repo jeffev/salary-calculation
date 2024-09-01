@@ -9,15 +9,19 @@
     <h:form>
         <p:commandButton value="Home" action="index.xhtml?faces-redirect=true" style="margin-right: 20px;" />
 
-        <p:commandButton value="Lista de pessoas" action="list_people.xhtml?faces-redirect=true"/>
+        <p:commandButton value="Lista de pessoas" action="lista_pessoas.xhtml?faces-redirect=true"/>
     </h:form>
     <br/><br/>
     <h:form id="uploadForm">
         <p:commandButton value="Recalcular Salários"
                          actionListener="#{pessoaSalarioConsolidadoController.gerarDadosSalariosConsolidado}"
-                         update="salariosTable" style="margin-right: 20px;"/>
+                         style="margin-right: 20px;"/>
 
-        <h:commandButton value="Bixar lista PDF" action="#{salariosReportController.generateReport}" />
+        <p:commandButton value="Atualizar lista"
+                         actionListener="#{pessoaSalarioConsolidadoController.loadPessoasConsolidado}"
+                         update=":uploadForm:salariosTable" style="margin-right: 20px;"/>
+
+        <p:commandButton value="Bixar lista PDF" action="#{salariosReportController.generateReport}" ajax="false" />
 
         <p:dataTable var="salario" value="#{pessoaSalarioConsolidadoController.listaSalariosConsolidados}"
                      paginator="true" rows="10" id="salariosTable">

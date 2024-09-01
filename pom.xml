@@ -6,13 +6,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.0-M2</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>academic-submission-portal</artifactId>
+	<artifactId>salary-calculation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>academic-submission-portal</name>
-	<description>Portal de Submissão de Trabalhos Acadêmicos</description>
+	<name>salary-calculation</name>
+	<description>Sistema de Cálculo de Salários</description>
 	<url/>
 	<licenses>
 		<license/>
