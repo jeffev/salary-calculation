@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,6 +61,10 @@ public class PessoaSalarioConsolidadoService {
     public void gerarDadosSalariosConsolidado() {
         List<Pessoa> pessoas = pessoaRepository.findAll();
 
+        Set<Integer> idsPessoas = pessoas.stream()
+                .map(Pessoa::getId)
+                .collect(Collectors.toSet());
+
         Map<Integer, PessoaSalarioConsolidado> consolidadoMap = pessoaSalarioConsolidadoRepository.findAll().stream()
                 .collect(Collectors.toMap(PessoaSalarioConsolidado::getPessoaId, consolidado -> consolidado));
 
@@ -73,5 +78,14 @@ public class PessoaSalarioConsolidadoService {
         }).collect(Collectors.toList());
 
         pessoaSalarioConsolidadoRepository.saveAll(toSaveList);
+
+        List<PessoaSalarioConsolidado> toDeleteList = consolidadoMap.values().stream()
+                .filter(consolidado -> !idsPessoas.contains(consolidado.getPessoaId()))
+                .collect(Collectors.toList());
+
+        if (!toDeleteList.isEmpty()) {
+            pessoaSalarioConsolidadoRepository.deleteAll(toDeleteList);
+        }
     }
+
 }

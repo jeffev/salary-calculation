@@ -45,6 +45,7 @@ public class PessoaService {
         pessoa.setUsuario(pessoaDetails.getUsuario());
         pessoa.setTelefone(pessoaDetails.getTelefone());
         pessoa.setDataNascimento(pessoaDetails.getDataNascimento());
+        pessoa.setCargo(pessoaDetails.getCargo());
         return pessoaRepository.save(pessoa);
     }
 }
