@@ -28,7 +28,7 @@
 
             <p:dataTable value="#{pessoaController.pessoas}" var="pessoa" paginator="true" rows="10" id="pessoasTable" editable="true">
 
-                <p:column headerText="ID" style="width: 5%;">
+                <p:column headerText="ID" style="width: 3%;">
                     <h:outputText value="#{pessoa.id}" />
                 </p:column>
 
@@ -54,7 +54,7 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Email">
+                <p:column headerText="Email" style="width: 15%;">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{pessoa.email}" />
@@ -76,7 +76,7 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Endereço">
+                <p:column headerText="Endereço" style="width: 15%;">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{pessoa.endereco}" />
@@ -87,7 +87,7 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="País">
+                <p:column headerText="País" style="width: 5%;">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{pessoa.pais}" />
@@ -109,7 +109,7 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Telefone">
+                <p:column headerText="Telefone" style="width: 7%;" >
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{pessoa.telefone}" />
@@ -120,7 +120,7 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Data de Nascimento">
+                <p:column headerText="Data de Nascimento" style="width: 7%;">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{pessoa.dataNascimento}">
@@ -133,7 +133,7 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Cargo">
+                <p:column headerText="Cargo" style="width: 5%;">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{pessoa.cargo.nome}" />
