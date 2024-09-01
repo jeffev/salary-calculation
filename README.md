@@ -8,6 +8,7 @@ Este projeto é um **Sistema de Cálculo de Salários** desenvolvido com **Sprin
 - **Hibernate**: Implementação de JPA para gerenciamento de persistência.
 - **PostgreSQL**: Banco de dados relacional para armazenamento dos dados.
 - **JoinFaces**: Biblioteca para integração de JSF com Spring Boot.
+- **JasperReports**: Framework para gerar relatórios.
 - **Mockito**: Framework para testes de unidade em Java.
 - **JUnit**: Framework para testes automatizados em Java.
 
@@ -15,12 +16,14 @@ Este projeto é um **Sistema de Cálculo de Salários** desenvolvido com **Sprin
 
 - **Cálculo/Recalculo de Salários**: Calcula ou recalcula os salários dos funcionários com base nos dados importados.
 - **Listagem de Funcionários e Salários**: Exibe uma lista de todos os funcionários e seus salários calculados.
+- **CRUD de pessoas**: Lista, exclusão, criação e edição de pessoas.
+- **Gerar PDF**: Gerar PDF da lista de psssoas consolidada.
 
 ## Configuração do Projeto
 
 ### Importante
 
-Antes de iniciar a aplicação, certifique-se de que as tabelas necessárias estejam criadas no banco de dados. As tabelas a serem importadas são:
+Antes de iniciar a aplicação, certifique-se de que as tabelas necessárias foram criadas e importadas no banco de dados. Pode iniciar o projeto que o Hibernate irá criar as tabelas, mas depois será necessário importa-las no banco para processeguir. As tabelas a serem importadas são:
 
 - `pessoa`
 - `cargos`
@@ -90,12 +93,17 @@ Aqui, você verá a interface da aplicação para gerenciamento dos funcionário
 ## Estrutura do Projeto
 
 - **`src/main/java/com/example`**: Contém o código fonte do projeto.
+  - **`config`**: Classes de consiguração.
   - **`controller`**: Controladores para gerenciar as solicitações HTTP.
   - **`model`**: Classes de modelo de dados.
+  - **`reporting`**: Service de relatório.
   - **`repository`**: Repositórios para acesso aos dados.
+  - **`service`**: Services para a regra de negócio.
 - **`src/main/resources`**: Contém recursos da aplicação.
   - **`application.properties`**: Configurações do Spring Boot e Hibernate.
   - **`META-INF/resources`**: Arquivos XHTML para renderização de páginas JSF.
+  - **`reports`**: Arquivos de relatórios (JasperReports).
+- **`src/test`**: Arquivos que contem os testes unitários.
 
 ## Contribuindo
 

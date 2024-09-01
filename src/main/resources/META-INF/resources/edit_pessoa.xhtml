@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Editar Pessoa</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:commandButton value="Home" action="index.xhtml?faces-redirect=true" style="margin-right: 20px;" />
+
+        <p:commandButton value="Lista de pessoas" action="list_people.xhtml?faces-redirect=true"/>
+    </h:form>
+    <h:form id="editPessoaForm">
+        <p:panel header="Editar Pessoa" style="width: 600px; margin: 0 auto;">
+
+            <p:messages id="msgs" autoUpdate="true" />
+
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel for="nome" value="Nome:" />
+                <p:inputText id="nome" value="#{pessoaController.selectedPessoa.nome}" required="true" />
+
+                <h:outputLabel for="cidade" value="Cidade:" />
+                <p:inputText id="cidade" value="#{pessoaController.selectedPessoa.cidade}" required="true" />
+
+                <h:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{pessoaController.selectedPessoa.email}" required="true" />
+
+                <h:outputLabel for="cep" value="CEP:" />
+                <p:inputText id="cep" value="#{pessoaController.selectedPessoa.cep}" required="true" />
+
+                <h:outputLabel for="endereco" value="Endereço:" />
+                <p:inputText id="endereco" value="#{pessoaController.selectedPessoa.endereco}" required="true" />
+
+                <h:outputLabel for="pais" value="País:" />
+                <p:inputText id="pais" value="#{pessoaController.selectedPessoa.pais}" required="true" />
+
+                <h:outputLabel for="usuario" value="Usuário:" />
+                <p:inputText id="usuario" value="#{pessoaController.selectedPessoa.usuario}" required="true" />
+
+                <h:outputLabel for="telefone" value="Telefone:" />
+                <p:inputText id="telefone" value="#{pessoaController.selectedPessoa.telefone}" required="true" />
+
+                <h:outputLabel for="dataNascimento" value="Data de Nascimento:" />
+                <p:calendar id="dataNascimento" value="#{pessoaController.selectedPessoa.dataNascimento}" pattern="dd/MM/yyyy" required="true" />
+
+                <h:outputLabel for="cargo" value="Cargo:" />
+                <p:selectOneMenu id="cargo" value="#{pessoaController.selectedPessoa.cargo}">
+                    <f:selectItems value="#{pessoaController.cargos}" var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.nome}" />
+                    <f:converter converterId="cargoConverter"/>
+                </p:selectOneMenu>
+            </h:panelGrid>
+
+            <p:commandButton value="Salvar"
+                             icon="pi pi-check"
+                             action="#{pessoaController.savePessoa()}"
+                             update="@form"
+                             style="margin-right: 10px;" />
+
+            <p:commandButton value="Cancelar"
+                             icon="pi pi-times"
+                             action="list_people.xhtml?faces-redirect=true" />
+
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

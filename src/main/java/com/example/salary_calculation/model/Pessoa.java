@@ -8,6 +8,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "pessoa")
 public class Pessoa {
@@ -20,11 +22,11 @@ public class Pessoa {
     private String cidade;
     private String email;
     private String cep;
-    private String endereco; // Corrigido de "Enderco"
+    private String endereco;
     private String pais;
     private String usuario;
     private String telefone;
-    private String dataNascimento;
+    private Date dataNascimento;
 
     @ManyToOne
     @JoinColumn(name = "cargo_id", nullable = true)
@@ -103,11 +105,11 @@ public class Pessoa {
         this.telefone = telefone;
     }
 
-    public String getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

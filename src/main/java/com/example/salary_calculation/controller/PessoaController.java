@@ -13,6 +13,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -40,10 +41,16 @@ public class PessoaController implements Serializable {
         selectedPessoa = new Pessoa();
     }
 
-    public void prepareNewPessoa() {
+    public void prepareNewPessoa() throws IOException {
         this.selectedPessoa = new Pessoa();
-        System.out.println("prepareNewPessoa");
-        System.out.println(selectedPessoa.getNome());
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect("edit_pessoa.xhtml?faces-redirect=true");
+    }
+
+    public void prepareEditPessoa(int id) throws IOException {
+        findPessoaById(id);
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect("edit_pessoa.xhtml?faces-redirect=true");
     }
 
     public void savePessoa() {
